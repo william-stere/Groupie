@@ -7,7 +7,7 @@ class DifyMain:
         self.config = {
             "API_BASE" : "http://ws-server/v1",
             "WORKFLOW_ID": "workflows/run",
-            "API_KEY": "app-ridikcsO76jrR0M6DGqLdIqN",
+            "API_KEY": "app-GhvZsM754wsnvKCwealEEc9b",
             "USER_INFO": "ws"
         }
 
@@ -22,10 +22,10 @@ class DifyMain:
             "Content-Type": "application/json"
         }
     
-    def send_request(self, user_input):
+    def send_request(self, user_input,png):
         payload = {
             "user": self.config["USER_INFO"],
-            "inputs": {"input": user_input},
+            "inputs": {"input": user_input, "png" : png},
             "session": self.session,
             "response_mode": "blocking"
         }
@@ -51,6 +51,6 @@ class DifyMain:
 
 if __name__ == "__main__":
     send = DifyMain()
-    send.send_request("hello")
+    send.send_request("hello", None)
     print("\nEXIT")
     
