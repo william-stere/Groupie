@@ -1,0 +1,6 @@
+{
+    "API_BASE" : "http://192.168.31.36/v1",
+    "WORKFLOW_ID": "workflows/run",
+    "API_KEY": "app-oYFUYHnYIGZFy35ZqQ70Siw5",
+    "USER_INFO": "ws"
+}

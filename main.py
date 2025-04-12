@@ -1,15 +1,20 @@
 import json
 import requests
 from uuid import uuid4
+from IflytekVudioToText import VudioToText
+
 
 class DifyMain:
     def __init__(self):
-        self.config = {
-            "API_BASE" : "http://ws-server/v1",
-            "WORKFLOW_ID": "workflows/run",
-            "API_KEY": "app-GhvZsM754wsnvKCwealEEc9b",
-            "USER_INFO": "ws"
-        }
+        with open("DifyConfig.json") as file:
+            ConfigJson = json.loads(file.read())
+            self.config = {
+                "API_BASE" : ConfigJson["API_BASE"],
+                "WORKFLOW_ID" : ConfigJson["WORKFLOW_ID"],
+                "API_KEY" : ConfigJson["API_KEY"],
+                "USER_INFO" : ConfigJson["USER_INFO"]
+                }
+
 
         self.session = {
             "session_id" : str(uuid4()),
@@ -22,10 +27,10 @@ class DifyMain:
             "Content-Type": "application/json"
         }
     
-    def send_request(self, user_input,png):
+    def send_request(self, user_input):
         payload = {
             "user": self.config["USER_INFO"],
-            "inputs": {"input": user_input, "png" : png},
+            "inputs": {"input": user_input,},
             "session": self.session,
             "response_mode": "blocking"
         }
@@ -40,7 +45,7 @@ class DifyMain:
             url, 
             json=payload,
             headers=self._build_headers(),
-            timeout=360
+            timeout=3600
         )
 
         print(f"{response.status_code}")
@@ -49,8 +54,15 @@ class DifyMain:
 
         print(json.dumps(json_response, indent=2, ensure_ascii=False))
 
+def AudioToText():
+    return 
+
+
+
 if __name__ == "__main__":
+    UserInput = VudioToText("lfasr_涉政.wav")
+    print(UserInput)
     send = DifyMain()
-    send.send_request("hello", None)
+    send.send_request(UserInput)
     print("\nEXIT")
     

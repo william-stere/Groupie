@@ -1,0 +1,7 @@
+{
+    "app_id": "<your app_id>",
+    "API_KEY": "<your API_KEY>",
+    "secret_key": "<tour secret_key>",
+    "engine_type": "sms16k",
+    "aue": "wav"
+  }
