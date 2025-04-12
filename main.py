@@ -4,7 +4,7 @@ from uuid import uuid4
 from IflytekVudioToText import VudioToText
 
 
-class DifyMain:
+class dify:
     def __init__(self):
         with open("DifyConfig.json") as file:
             ConfigJson = json.loads(file.read())
@@ -27,10 +27,16 @@ class DifyMain:
             "Content-Type": "application/json"
         }
     
-    def send_request(self, user_input):
+    def send_request(self, user_input, *png):
+        try:
+            if a[0] == None:
+                    exit
+        except:
+            a = None
         payload = {
+            #TODO 图片处理逻辑
             "user": self.config["USER_INFO"],
-            "inputs": {"input": user_input,},
+            "inputs": {"input": user_input, "png" : png[0]},
             "session": self.session,
             "response_mode": "blocking"
         }
@@ -60,9 +66,9 @@ def AudioToText():
 
 
 if __name__ == "__main__":
-    UserInput = VudioToText("lfasr_涉政.wav")
-    print(UserInput)
-    send = DifyMain()
-    send.send_request(UserInput)
+    VudioInput = VudioToText(input(">>>"))
+    #TODO 图片输入逻辑
+    #TODO 行空板的代码
+    dify.send_request(VudioInput)
     print("\nEXIT")
     

@@ -77,6 +77,18 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1744460656790-source-1744460689357-target
+      source: '1744460656790'
+      sourceHandle: source
+      target: '1744460689357'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
         isInLoop: false
         sourceType: knowledge-retrieval
         targetType: llm
@@ -88,13 +100,36 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInIteration: false
         isInLoop: false
         sourceType: start
-        targetType: knowledge-retrieval
-      id: 1744428900514-source-1744445655741-target
+        targetType: if-else
+      id: 1744428900514-source-1744460911794-target
       source: '1744428900514'
       sourceHandle: source
+      target: '1744460911794'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1744460911794-true-1744445655741-target
+      source: '1744460911794'
+      sourceHandle: 'true'
       target: '1744445655741'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1744460911794-false-1744460656790-target
+      source: '1744460911794'
+      sourceHandle: 'false'
+      target: '1744460656790'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -108,17 +143,29 @@ workflow:
         - label: input
           max_length: 256
           options: []
-          required: true
+          required: false
           type: text-input
           variable: input
-      height: 90
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: png
+          max_length: 48
+          options: []
+          required: false
+          type: file
+          variable: png
+      height: 116
       id: '1744428900514'
       position:
-        x: 30
-        y: 246
+        x: 31.428571428571445
+        y: 263
       positionAbsolute:
-        x: 30
-        y: 246
+        x: 31.428571428571445
+        y: 263
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -153,11 +200,11 @@ workflow:
       height: 92
       id: '1744445655741'
       position:
-        x: 334
-        y: 246
+        x: 638
+        y: 263
       positionAbsolute:
-        x: 334
-        y: 246
+        x: 638
+        y: 263
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -183,7 +230,7 @@ workflow:
 
             你是ai助手，你要结合知识库回答用户提出的问题，并且知识库中是没有任何链接。如果存在，就将其忽略。如果用户的提问中询问了知识库中不存在的内容，那么就不要参考知识库。并且不能使用任何表情。{{#1744428900514.input#}}'
         selected: false
-        title: LLM qy chat
+        title: LLM  chat
         type: llm
         variables: []
         vision:
@@ -191,12 +238,12 @@ workflow:
       height: 90
       id: '1744445889357'
       position:
-        x: 638
-        y: 246
+        x: 942
+        y: 263
       positionAbsolute:
-        x: 638
-        y: 246
-      selected: true
+        x: 942
+        y: 263
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -214,17 +261,106 @@ workflow:
       height: 90
       id: '1744445988780'
       position:
-        x: 942
-        y: 246
+        x: 1246
+        y: 263
       positionAbsolute:
-        x: 942
-        y: 246
+        x: 1246
+        y: 263
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: OpenGVLab/InternVL2-26B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: de3b9db7-64cd-42e0-8e7b-b8de4b2d627f
+          role: system
+          text: 使用中文详细的描述图片中的内容，并且地点都在清远。然后回答用户的问题{{#1744428900514.input#}}
+        selected: false
+        title: LLM png
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1744428900514'
+            - png
+          enabled: true
+      height: 90
+      id: '1744460656790'
+      position:
+        x: 638
+        y: 394
+      positionAbsolute:
+        x: 638
+        y: 394
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1744460656790'
+          - text
+          variable: text
+        selected: false
+        title: 结束 png
+        type: end
+      height: 90
+      id: '1744460689357'
+      position:
+        x: 942
+        y: 394
+      positionAbsolute:
+        x: 942
+        y: 394
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not exists
+            id: c78668bb-5393-4c14-aa5e-817ca7be4620
+            value: ''
+            varType: file
+            variable_selector:
+            - '1744428900514'
+            - png
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 126
+      id: '1744460911794'
+      position:
+        x: 334
+        y: 263
+      positionAbsolute:
+        x: 334
+        y: 263
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
     viewport:
-      x: 337.2
-      y: 186.3
+      x: 155.20000000000005
+      y: 85.69999999999999
       zoom: 0.7
