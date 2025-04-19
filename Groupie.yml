@@ -13,7 +13,7 @@ dependencies:
 - current_identifier: null
   type: marketplace
   value:
-    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.7@8b9d2f57d314120744c245b6fe4f8701e1a7490a500d9fb74e9e9dceeaea5f70
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.9@d0bed72582f8945dba4bf0fb23e03a449e7319f7cb0056ce02bfc76ca3f08215
 kind: app
 version: 0.1.5
 workflow:
@@ -98,50 +98,6 @@ workflow:
     edges:
     - data:
         isInIteration: false
-        sourceType: question-classifier
-        targetType: llm
-      id: 1741410040513-1-1741402615405-target
-      source: '1741410040513'
-      sourceHandle: '1'
-      target: '1741402615405'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        sourceType: start
-        targetType: if-else
-      id: 1741402484219-source-1741418010493-target
-      source: '1741402484219'
-      sourceHandle: source
-      target: '1741418010493'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        sourceType: if-else
-        targetType: llm
-      id: 1741418010493-true-1741415831113-target
-      source: '1741418010493'
-      sourceHandle: 'true'
-      target: '1741415831113'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        sourceType: if-else
-        targetType: question-classifier
-      id: 1741418010493-false-1741410040513-target
-      source: '1741418010493'
-      sourceHandle: 'false'
-      target: '1741410040513'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
         sourceType: llm
         targetType: variable-aggregator
       id: 17414182437160-source-1741944725396-target
@@ -163,28 +119,6 @@ workflow:
       type: custom
       zIndex: 0
     - data:
-        isInIteration: false
-        sourceType: llm
-        targetType: variable-aggregator
-      id: 1741415831113-source-1741945440425-target
-      source: '1741415831113'
-      sourceHandle: source
-      target: '1741945440425'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInIteration: false
-        sourceType: variable-aggregator
-        targetType: llm
-      id: 1741945440425-source-17414182437160-target
-      source: '1741945440425'
-      sourceHandle: source
-      target: '17414182437160'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
         isInLoop: false
         sourceType: llm
         targetType: variable-aggregator
@@ -196,13 +130,93 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1741402484219-source-1745053688219-target
+      source: '1741402484219'
+      sourceHandle: source
+      target: '1745053688219'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: question-classifier
+      id: 1745031345432-source-1741410040513-target
+      source: '1745031345432'
+      sourceHandle: source
+      target: '1741410040513'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
         isInLoop: false
         sourceType: question-classifier
-        targetType: variable-aggregator
-      id: 1741410040513-1741410080536-1741945440425-target
+        targetType: llm
+      id: 1741410040513-1-1741402615405-target
+      source: '1741410040513'
+      sourceHandle: '1'
+      target: '1741402615405'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1741410040513-1741410080536-17414182437160-target
       source: '1741410040513'
       sourceHandle: '1741410080536'
-      target: '1741945440425'
+      target: '17414182437160'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1745053688219-source-1745053778826-target
+      source: '1745053688219'
+      sourceHandle: source
+      target: '1745053778826'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1745053778826-source-1745056083347-target
+      source: '1745053778826'
+      sourceHandle: source
+      target: '1745056083347'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1745056083347-true-1745031345432-target
+      source: '1745056083347'
+      sourceHandle: 'true'
+      target: '1745031345432'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1745056083347-false-1745056124252-target
+      source: '1745056083347'
+      sourceHandle: 'false'
+      target: '1745056124252'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -213,11 +227,17 @@ workflow:
         title: 开始
         type: start
         variables:
-        - label: input
-          max_length: 256
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: input
+          max_length: 64000
           options: []
-          required: false
-          type: text-input
+          required: true
+          type: paragraph
           variable: input
         - allowed_file_extensions: []
           allowed_file_types:
@@ -225,20 +245,20 @@ workflow:
           allowed_file_upload_methods:
           - local_file
           - remote_url
-          label: png
+          label: inpng
           max_length: 48
           options: []
-          required: false
+          required: true
           type: file
-          variable: png
+          variable: inpng
       height: 116
       id: '1741402484219'
       position:
         x: 30
-        y: 265
+        y: 286
       positionAbsolute:
         x: 30
-        y: 265
+        y: 286
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -261,7 +281,11 @@ workflow:
         prompt_template:
         - id: c7870af6-3f16-4fe4-abb6-920240de4cae
           role: system
-          text: '{{#context#}}{{#1741402484219.input#}}你是一个的群成员，给你的内容是其他群成员发的信息。你须要回答他们的问题。
+          text: '上下文：{{#context#}}
+
+            你是一个的群成员，给你的内容是其他群成员发的信息。你需要回答他们的问题。当前时间（UTC标准时）：{{#1745031345432.text#}}。时区：东八区。
+
+            输入：{{#1745053778826.text#}}
 
             并且所有要发到群里的信息都要用<msg>和</msg>包裹，一组<msg></msg>为一条消息。回答时将答案和解释分成两条消息。如果单条消息太长应将其分成多条消息。单条消息应不超过15个字。不要使用像😊🤣😒这样的表情，你可以使用类似与这样的":)""":("的颜文字。'
         retry_config:
@@ -277,11 +301,11 @@ workflow:
       height: 90
       id: '1741402615405'
       position:
-        x: 1246
-        y: 456
+        x: 1854
+        y: 416
       positionAbsolute:
-        x: 1246
-        y: 456
+        x: 1854
+        y: 416
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -291,7 +315,7 @@ workflow:
         desc: ''
         outputs:
         - value_selector:
-          - '1741945440425'
+          - '1741944725396'
           - output
           variable: output
         selected: false
@@ -300,12 +324,12 @@ workflow:
       height: 90
       id: '1741405363457'
       position:
-        x: 1854
-        y: 265
+        x: 2462
+        y: 286
       positionAbsolute:
-        x: 1854
-        y: 265
-      selected: true
+        x: 2462
+        y: 286
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -322,11 +346,11 @@ workflow:
           completion_params:
             temperature: 0.7
           mode: chat
-          name: deepseek-ai/DeepSeek-V3
-          provider: langgenius/siliconflow/siliconflow
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
         query_variable_selector:
-        - '1741402484219'
-        - input
+        - '1745053778826'
+        - text
         selected: false
         title: 问题分类器
         topics: []
@@ -336,80 +360,11 @@ workflow:
       height: 172
       id: '1741410040513'
       position:
-        x: 638
-        y: 436
+        x: 1550
+        y: 286
       positionAbsolute:
-        x: 638
-        y: 436
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
-    - data:
-        context:
-          enabled: false
-          variable_selector: []
-        desc: ''
-        model:
-          completion_params:
-            temperature: 0.7
-          mode: chat
-          name: OpenGVLab/InternVL2-26B
-          provider: langgenius/siliconflow/siliconflow
-        prompt_template:
-        - id: d7d4a620-9fae-468a-bd1c-751d7067ea40
-          role: system
-          text: 你负责识别图片内容，你需要简单描述图片内容和识别图片文字。输出的描述要用<pic>和</pic>包裹
-        selected: false
-        title: LLM png
-        type: llm
-        variables: []
-        vision:
-          configs:
-            detail: high
-            variable_selector:
-            - '1741402484219'
-            - png
-          enabled: true
-      height: 90
-      id: '1741415831113'
-      position:
-        x: 638
-        y: 306
-      positionAbsolute:
-        x: 638
-        y: 306
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
-    - data:
-        cases:
-        - case_id: 'true'
-          conditions:
-          - comparison_operator: exists
-            id: 4f6bef7b-6653-441c-941b-cf691f4ed76a
-            value: ''
-            varType: file
-            variable_selector:
-            - '1741402484219'
-            - png
-          id: 'true'
-          logical_operator: and
-        desc: ''
-        selected: false
-        title: 条件分支
-        type: if-else
-      height: 126
-      id: '1741418010493'
-      position:
-        x: 334
-        y: 265
-      positionAbsolute:
-        x: 334
-        y: 265
+        x: 1550
+        y: 286
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -432,11 +387,12 @@ workflow:
         prompt_template:
         - id: 6c2f54f9-cabc-4b44-858b-1c08963b47b0
           role: system
-          text: '{{#context#}}{{#1741945440425.output#}}你是一个的群成员，你的群昵称是william_stere.给你的内容是其他群成员发的信息。给你的消息都是[time][user][msg]的格式，[time]是他发消息的时间，[user]是发消息的群成员[msg]是他发的消息。如果[msg]为空那么他发的是图片
+          text: '上下文：{{#context#}}
 
-            用<pic>和</pic>包裹的内容是设备出来的图片信息。
+            你是一个的群成员，你的群昵称是william_stere.给你的内容是其他群成员发的信息。给你的消息都是[user][msg]的格式，[user]是发消息的群成员[msg]是他发的消息。如果[msg]为空那么他发的是图片。当前时间(UTC标准时)：{{#1745031345432.text#}}。时区：东八区。
 
-            {{#1741945440425.output#}}里包括了识别出的图片信息，如果为空则忽略。根据图片描述将图片分成[表情包]、[其他]。如果图片是“其他”这一类的你需要将其忽略，并根据上下文猜测图片内容，并回避与其有关的话题。
+            输入：{{#1745053778826.text#}}
+
 
             你的语言要口语化。你可以选择不回答其他群成员的问题或者话题，但如果他@了你就一定要回答。如果遇到刷屏(短时间内发多条消息)就将其忽略。
 
@@ -454,11 +410,11 @@ workflow:
       height: 90
       id: '17414182437160'
       position:
-        x: 1246
-        y: 265
+        x: 1854
+        y: 286
       positionAbsolute:
-        x: 1246
-        y: 265
+        x: 1854
+        y: 286
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -468,7 +424,7 @@ workflow:
         desc: ''
         output_type: string
         selected: false
-        title: 变量聚合器
+        title: 变量聚合器 out
         type: variable-aggregator
         variables:
         - - '17414182437160'
@@ -478,11 +434,11 @@ workflow:
       height: 130
       id: '1741944725396'
       position:
-        x: 1550
-        y: 265
+        x: 2158
+        y: 286
       positionAbsolute:
-        x: 1550
-        y: 265
+        x: 2158
+        y: 286
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -490,29 +446,339 @@ workflow:
       width: 244
     - data:
         desc: ''
-        output_type: string
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: '%Y-%m-%d %H:%M:%S'
+          form: form
+          human_description:
+            en_US: Time format in strftime standard.
+            ja_JP: Time format in strftime standard.
+            pt_BR: Time format in strftime standard.
+            zh_Hans: strftime 标准的时间格式。
+          label:
+            en_US: Format
+            ja_JP: Format
+            pt_BR: Format
+            zh_Hans: 格式
+          llm_description: null
+          max: null
+          min: null
+          name: format
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: UTC
+          form: form
+          human_description:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          label:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          llm_description: null
+          max: null
+          min: null
+          name: timezone
+          options:
+          - label:
+              en_US: UTC
+              ja_JP: UTC
+              pt_BR: UTC
+              zh_Hans: UTC
+            value: UTC
+          - label:
+              en_US: America/New_York
+              ja_JP: America/New_York
+              pt_BR: America/New_York
+              zh_Hans: 美洲/纽约
+            value: America/New_York
+          - label:
+              en_US: America/Los_Angeles
+              ja_JP: America/Los_Angeles
+              pt_BR: America/Los_Angeles
+              zh_Hans: 美洲/洛杉矶
+            value: America/Los_Angeles
+          - label:
+              en_US: America/Chicago
+              ja_JP: America/Chicago
+              pt_BR: America/Chicago
+              zh_Hans: 美洲/芝加哥
+            value: America/Chicago
+          - label:
+              en_US: America/Sao_Paulo
+              ja_JP: America/Sao_Paulo
+              pt_BR: América/São Paulo
+              zh_Hans: 美洲/圣保罗
+            value: America/Sao_Paulo
+          - label:
+              en_US: Asia/Shanghai
+              ja_JP: Asia/Shanghai
+              pt_BR: Asia/Shanghai
+              zh_Hans: 亚洲/上海
+            value: Asia/Shanghai
+          - label:
+              en_US: Asia/Ho_Chi_Minh
+              ja_JP: Asia/Ho_Chi_Minh
+              pt_BR: Ásia/Ho Chi Minh
+              zh_Hans: 亚洲/胡志明市
+            value: Asia/Ho_Chi_Minh
+          - label:
+              en_US: Asia/Tokyo
+              ja_JP: Asia/Tokyo
+              pt_BR: Asia/Tokyo
+              zh_Hans: 亚洲/东京
+            value: Asia/Tokyo
+          - label:
+              en_US: Asia/Dubai
+              ja_JP: Asia/Dubai
+              pt_BR: Asia/Dubai
+              zh_Hans: 亚洲/迪拜
+            value: Asia/Dubai
+          - label:
+              en_US: Asia/Kolkata
+              ja_JP: Asia/Kolkata
+              pt_BR: Asia/Kolkata
+              zh_Hans: 亚洲/加尔各答
+            value: Asia/Kolkata
+          - label:
+              en_US: Asia/Seoul
+              ja_JP: Asia/Seoul
+              pt_BR: Asia/Seoul
+              zh_Hans: 亚洲/首尔
+            value: Asia/Seoul
+          - label:
+              en_US: Asia/Singapore
+              ja_JP: Asia/Singapore
+              pt_BR: Asia/Singapore
+              zh_Hans: 亚洲/新加坡
+            value: Asia/Singapore
+          - label:
+              en_US: Europe/London
+              ja_JP: Europe/London
+              pt_BR: Europe/London
+              zh_Hans: 欧洲/伦敦
+            value: Europe/London
+          - label:
+              en_US: Europe/Berlin
+              ja_JP: Europe/Berlin
+              pt_BR: Europe/Berlin
+              zh_Hans: 欧洲/柏林
+            value: Europe/Berlin
+          - label:
+              en_US: Europe/Moscow
+              ja_JP: Europe/Moscow
+              pt_BR: Europe/Moscow
+              zh_Hans: 欧洲/莫斯科
+            value: Europe/Moscow
+          - label:
+              en_US: Australia/Sydney
+              ja_JP: Australia/Sydney
+              pt_BR: Australia/Sydney
+              zh_Hans: 澳大利亚/悉尼
+            value: Australia/Sydney
+          - label:
+              en_US: Pacific/Auckland
+              ja_JP: Pacific/Auckland
+              pt_BR: Pacific/Auckland
+              zh_Hans: 太平洋/奥克兰
+            value: Pacific/Auckland
+          - label:
+              en_US: Africa/Cairo
+              ja_JP: Africa/Cairo
+              pt_BR: Africa/Cairo
+              zh_Hans: 非洲/开罗
+            value: Africa/Cairo
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          format: ''
+          timezone: ''
+        provider_id: time
+        provider_name: time
+        provider_type: builtin
         selected: false
-        title: 变量聚合器 png
-        type: variable-aggregator
-        variables:
-        - - '1741415831113'
-          - text
-        - - '1741402484219'
-          - input
-      height: 130
-      id: '1741945440425'
+        title: 获取当前时间
+        tool_configurations:
+          format: '%Y-%m-%d %H:%M:%S'
+          timezone: UTC
+        tool_label: 获取当前时间
+        tool_name: current_time
+        tool_parameters: {}
+        type: tool
+      height: 116
+      id: '1745031345432'
+      position:
+        x: 1246
+        y: 286
+      positionAbsolute:
+        x: 1246
+        y: 286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: OpenGVLab/InternVL2-26B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 6acc5370-74b3-409f-94d2-7525b7e54b8f
+          role: system
+          text: "这是微信截图识别任务，你需要从提供的微信截图中提取群聊名称、消息内容和发送者昵称，并以指定的JSON格式输出。请严格按照以下步骤操作：\n\
+            \n1. 仔细查看微信截图，识别出群聊名称，并将其填入JSON的\"ChatName\"字段。\n2. 逐条识别消息，每条消息需要包含以下字段：\n\
+            \   - \"user\"：发送者昵称\n   - \"msg\"：消息内容（如果是图片，需留空）\n   - \"png\"：布尔值，标记是否为图片消息（true表示图片，false表示文本）\n\
+            3. 如果是图片消息：\n   - 将\"png\"字段设为true\n4. 将所有识别结果整理成指定的JSON格式，确保字段名称和结构完全一致。\n\
+            5. 输出必须为纯JSON，不包含任何额外文字、注释或XML标签。\n\n注意事项：\n- 确保群聊名称和发送者昵称准确无误。\n- 图片消息的描述应简洁但包含关键信息。\n\
+            - 每条消息必须包含完整的三个字段（user、msg、png）且不能有其他字段。\n- 输出仅为JSON，无需添加任何解释或说明。\n\n\
+            示例：\n输入：一张微信截图，群聊名称为“家庭群”，包含以下消息：\n1. 用户“妈妈”发送文字：“晚上吃什么？”\n2. 用户“爸爸”发送一张图片，图片内容是一桌饭菜。\n\
+            \n输出：\n{\n  \"ChatName\" : \"家庭群\",\n  \"msgs\" : [\n    {\n      \"user\"\
+            \ : \"妈妈\",\n      \"msg\" : \"晚上吃什么？\",\n      \"png\" : false\n    },\n\
+            \    {\n      \"user\" : \"爸爸\",\n      \"msg\" : \"\",\n      \"png\"\
+            \ : true\n    }\n  ]\n}\n  ]\n}"
+        selected: false
+        title: LLM wechat
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1741402484219'
+            - inpng
+          enabled: true
+      height: 90
+      id: '1745053688219'
+      position:
+        x: 334
+        y: 286
+      positionAbsolute:
+        x: 334
+        y: 286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: Pro/OpenGVLab/InternVL2-8B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 3e0f28d9-efc3-464c-8ead-1e309bbabf14
+          role: system
+          text: "上下文：{{#1741402484219.input#}}\n识别内容：{{#1745053688219.text#}}\n你负责比较两个JSON格式的聊天记录，找出新的消息。请按照以下步骤进行操作：\n\
+            \n1. 仔细阅读并理解输入的上下文和识别内容，两者都是JSON格式，具有相同的字段结构。\n2. 只关注\"msgs\"数组中的每条消息，每条消息包含三个字段：\n\
+            \   - \"user\"：发送者昵称\n   - \"msg\"：消息内容\n   - \"png\"：布尔值，标记是否为图片消息（true=图片，false=文本）\n\
+            3. 对比规则：\n   - 对于图片消息(\"png\"=true)：当发送者昵称相同且msg内容的语义大致相同或者有相同的字段，就视为相同消息\n\
+            \   - 对于文本消息(png=false)：只要发送者昵称或msg内容有细微差异，就视为相同消息\n4. 输出要求：\n   - 如果发现新消息，以JSON格式输出所有新消息，保持原始数据结构\n\
+            \   - 如果没有新消息，输出纯文本\"None\"，不要输出任何额外内容\n   - 输出中不要包含任何XML标签\n5. 处理时请注意：\n\
+            \   - 保持字段名称和大小写一致\n   - 图片消息的msg字段内容比较不需要完全匹配\n    -文本消息的msg字段内容匹配需要非常接近\n\
+            \n示例输入：\n上下文：\n{\n    \"ChatName\": \"家庭群\",\n    \"msgs\": [\n      {\"\
+            user\": \"妈妈\", \"msg\": \"晚上吃什么？\", \"png\": false},\n      {\"user\"\
+            : \"爸爸\", \"msg\": \"文字内容：不知道，图片信息，有一只猫\", \"png\": true}\n    ]\n  }\n\
+            识别内容：\n{\n    \"ChatName\": \"家庭群\",\n    \"msgs\": [\n      {\"user\"\
+            : \"妈妈\", \"msg\": \"晚上吃什么？\", \"png\": false},\n      {\"user\": \"爸爸\"\
+            , \"msg\": \"文字内容：不知道，图片信息，猫\", \"png\": true},\n      {\"user\": \"儿子\"\
+            , \"msg\": \"我想吃火锅\", \"png\": false}\n    ]\n}\n输出：\n{\n  \"ChatName\"\
+            : \"家庭群\",\n  \"msgs\": [\n    {\"user\": \"儿子\", \"msg\": \"我想吃火锅\",\
+            \ \"png\": false}\n  ]\n}"
+        selected: false
+        title: LLM 区别消息
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1745053778826'
+      position:
+        x: 638
+        y: 286
+      positionAbsolute:
+        x: 638
+        y: 286
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not contains
+            id: 87350c44-e766-442b-aadb-92c636e51c03
+            value: '{'
+            varType: string
+            variable_selector:
+            - '1745053778826'
+            - text
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 126
+      id: '1745056083347'
       position:
         x: 942
-        y: 265
+        y: 286
       positionAbsolute:
         x: 942
-        y: 265
+        y: 286
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 结束 没有输入
+        type: end
+      height: 54
+      id: '1745056124252'
+      position:
+        x: 1246
+        y: 442
+      positionAbsolute:
+        x: 1246
+        y: 442
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -304.1999999999998
-      y: 298.99999999999994
+      x: 234.4000000000001
+      y: 107.70000000000005
       zoom: 0.7
